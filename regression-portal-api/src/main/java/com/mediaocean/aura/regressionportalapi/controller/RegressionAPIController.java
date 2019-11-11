@@ -1,6 +1,8 @@
 package com.mediaocean.aura.regressionportalapi.controller;
 
 import com.mediaocean.aura.regressionportalapi.entity.Regression;
+import com.mediaocean.aura.regressionportalapi.entity.RegressionDetail;
+import com.mediaocean.aura.regressionportalapi.repository.RegressionDetailRepository;
 import com.mediaocean.aura.regressionportalapi.repository.RegressionRepository;
 import com.mediaocean.aura.regressionportalapi.service.MaintenanceRequiredApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,14 @@ public class RegressionAPIController {
     RegressionRepository regressionRepository;
 
     @Autowired
+    RegressionDetailRepository regressionDetailRepository;
+
+    @Autowired
     MaintenanceRequiredApi maintenanceRequiredApi;
 
-    @PostMapping(value = "/")
-    public List<Regression> get() {
-        List<Regression> regressionList = regressionRepository.findAllByExectutionDateAndExecutionStatusQuery("19/09/2019");
+    @GetMapping(value = "/")
+    public List<Regression> get(@RequestParam String module, @RequestParam String date) {
+        List<Regression> regressionList = regressionRepository.findAllByExectutionDateAndModuleAndExecutionStatusQuery(date, module);
         /*List<RegressionDTO> regressionDTOList = new ArrayList<>();
         regressionList.forEach(regression ->
                 regressionDTOList.add(new RegressionDTO(regression, maintenanceRequiredApi.get(3, regression.getTestCaseClass(), regression.getLocale()))));
@@ -34,8 +39,8 @@ public class RegressionAPIController {
         return regressionRepository.findAllByRegressionQuery();
     }
 
-    @PostMapping(value = "/detail")
-    public Regression getDetails() {
-        return regressionRepository.getByTestCaseClassAndExecutionDateAndModule("Smoke_Test_Suite.Main.QATEST_15389_15390", "19/09/2019", "TIME");
+    @GetMapping(value = "/detail")
+    public RegressionDetail getDetails(@RequestParam String module, @RequestParam String date, @RequestParam String testCase) {
+        return regressionDetailRepository.getByTestCaseClassAndExecutionDateAndModule(testCase, date, date);
     }
 }

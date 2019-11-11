@@ -6,6 +6,7 @@ import {ResponsivePie} from '@nivo/pie';
 import './../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import {data} from './data.js';
+import {ModalExample} from './modal'
 
 
 class App extends Component {
@@ -44,11 +45,7 @@ class App extends Component {
             module: module.value,
             exceutionDate: date.value
         };
-        fetch('http://pu-nb-cpaul.na.rtdom.net:8080/regression-api/', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json; charset=utf-8"},
-            body: JSON.stringify(requestParams)
-        }).then(res => res.json())
+        fetch(`http://pu-nb-cpaul.na.rtdom.net:8080/regression-api/?module=${module.value}&date=${date.value}`).then(res => res.json())
             .then(data => {
                 this.setState({tableData: data});
                 this.setState({showSpinner: false});
@@ -95,17 +92,28 @@ class App extends Component {
 
     render() {
         let count = 0;
-        let groupedRecords = _.groupBy(this.state.tableData, 'testCaseClass');
+        let testMap = {};
+        _.forEach(this.state.tableData, (value) => {
+            if (testMap[value.testCaseClass]) {
+                if (!_.includes(testMap[value.testCaseClass], value.continent)) {
+                    testMap[value.testCaseClass].push(value.continent);
+                }
+            }
+            else {
+                testMap[value.testCaseClass] = [];
+                testMap[value.testCaseClass].push(value.continent);
+            }
+        });
         let records = this.state.tableData.map(function (row) {
             count += 1;
             return (
                 <tr>
                     <th scope="row">{count}</th>
                     <td>{row.testCaseClass}</td>
-                    <td>{row.continent}</td>
+                    <td>{testMap[row.testCaseClass].join(', ')}</td>
                     <td>Mark</td>
                     <td>Otto</td>
-                    <td>@mdo</td>
+                    <td><ModalExample data={row}></ModalExample></td>
                 </tr>
             );
         });
@@ -215,7 +223,7 @@ class App extends Component {
                                 <th>Continent</th>
                                 <th>Execution Status</th>
                                 <th>Assigned to</th>
-                                <th>Comment</th>
+                                <th>View</th>
                             </tr>
                             </thead>
                             <tbody>
