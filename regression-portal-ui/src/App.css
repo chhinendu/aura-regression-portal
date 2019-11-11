@@ -20,3 +20,9 @@
 .table-container tbody {
     overflow: hidden;
 }
+
+.loading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}

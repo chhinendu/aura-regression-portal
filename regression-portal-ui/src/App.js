@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {Container, Row, Col, Table, Button} from 'reactstrap';
+import {Container, Row, Col, Table, Button, Spinner} from 'reactstrap';
 import Select from 'react-select';
 import {ResponsiveBar} from '@nivo/bar';
 import './../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -15,7 +15,8 @@ class App extends Component {
         moduleOptions: [],
         selectedModule: null,
         executionDates: [],
-        selectedExecutionDate: null
+        selectedExecutionDate: null,
+        showSpinner: false
     };
 
     handleModuleChange = selectedOption => {
@@ -37,6 +38,7 @@ class App extends Component {
     }
 
     getRecords(module, date) {
+        this.setState({showSpinner: true});
         let requestParams = {
             module: module.value,
             exceutionDate: date.value
@@ -48,10 +50,12 @@ class App extends Component {
         }).then(res => res.json())
             .then(data => {
                 this.setState({tableData: data});
+                this.setState({showSpinner: false});
             });
     }
 
     getMasterData() {
+        this.setState({showSpinner: true});
         fetch('http://pu-nb-cpaul.na.rtdom.net:8080/regression-api/regressions').then(res => res.json())
             .then(data => {
                 data = _.chain(data).groupBy("module").map(function (v, i) {
@@ -72,7 +76,7 @@ class App extends Component {
                 this.setState({moduleOptions: moduleOptions});
                 this.setState({selectedModule: moduleOptions[0]});
                 this.handleModuleChange(moduleOptions[0]);
-                console.log(data);
+                this.setState({showSpinner: false});
             });
     }
 
@@ -132,6 +136,7 @@ class App extends Component {
                         </Table>
                     </Row>
                 </Container>
+                { this.state.showSpinner ? <Spinner className="loading" color="success" /> : null }
             </div>
         )
     };
