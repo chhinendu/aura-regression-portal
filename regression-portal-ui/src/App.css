@@ -1,32 +1,69 @@
 .modal-dialog {
     max-width: 1000px;
 }
+body::after {
+    content: "";
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    background-color: #F8F8F8;
+}
+
 .app-header {
-    height: 50px;
-    background-color: #795C5F;
-    color: #E6B89C;
-    line-height: 50px;
-    text-align: center;
+    height: 60px;
+    color: #FFFFFF;
+    line-height: 60px;
+    text-align: left;
+    padding: 0 30px;
+    font-size: 18px;
+    background-color: black;
 }
 
 .chart-container {
-    height: 400px;
-    text-align: center;
+    margin: 10px 0 10px 10px;
+    padding-top: 60px;
+    background-color: rgba(200,200,200, 0.2);
 }
 
 .table-container {
-    height: 500px;
-    overflow-x: scroll;
+    max-height: 500px;
+    min-height: 30px;
+    overflow-y: auto;
+    margin: 0;
 }
 
-.table-container tbody {
-    overflow: hidden;
+.table {
+    margin-bottom: 0;
 }
 
 .loading {
     position: fixed;
     left: 50%;
     top: 50%;
+}
+
+.filter-container {
+    margin: 10px;
+    padding-top: 60px;
+    background-color: rgba(200,200,200, 0.2);
+}
+
+.filter-btn {
+    width: 100px;
+    color: #FFFFFF;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.selectContainer {
+    width: 40%;
+    margin: 0 auto;
+    height: 40px;
+    margin-top: 30px;
 }
 
 .App {
@@ -74,11 +111,6 @@
 .chart-page_main {
     width: 100%;
     margin: 0 auto;
-}
-
-.table-container {
-    padding: 20px;
-    overflow: visible;
 }
 
 .header-detail {

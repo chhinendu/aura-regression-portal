@@ -4,27 +4,27 @@ export let data = [
         "label": "UK",
         "value": 0,
         "count": 0,
-        "color": "#2185d0"
+        "color": "#58508d"
     },
     {
         "id": "US",
         "label": "US",
         "value": 0,
         "count": 0,
-        "color": "#db2828"
+        "color": "#bc5090"
     },
     {
         "id": "AUSTRALIA",
         "label": "AUSTRALIA",
         "value": 0,
         "count": 0,
-        "color": "#fbbd08"
+        "color": "#f3a533"
     },
     {
         "id": "GERMAN",
         "label": "GERMAN",
         "value": 0,
         "count": 0,
-        "color": "#f2711c"
+        "color": "#eb5f5e"
     }
 ];

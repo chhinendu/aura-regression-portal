@@ -41,10 +41,6 @@ class App extends Component {
 
     getRecords(module, date) {
         this.setState({showSpinner: true});
-        let requestParams = {
-            module: module.value,
-            exceutionDate: date.value
-        };
         fetch(`http://pu-nb-cpaul.na.rtdom.net:8080/regression-api/?module=${module.value}&date=${date.value}`).then(res => res.json())
             .then(data => {
                 this.setState({tableData: data});
@@ -124,22 +120,8 @@ class App extends Component {
                     Regression portal
                 </header>
                 <Container fluid={true}>
-                    <Row>
-                        <Col>
-                            <Select
-                                value={this.state.selectedModule}
-                                onChange={this.handleModuleChange}
-                                options={this.state.moduleOptions}
-                            /></Col>
-                        <Col><Select
-                            value={this.state.selectedExecutionDate}
-                            onChange={this.handleExceutionDateChange}
-                            options={this.state.executionDates}
-                        /></Col>
-                        <Col><Button color="warning" onClick={() => this.getRecords(this.state.selectedModule, this.state.selectedExecutionDate)}>Filter</Button></Col>
-                    </Row>
-                    <hr/>
                     <Row style={{height: 400}}>
+                        <Col className="chart-container">
                         <ResponsivePie
                             data={data}
                             margin={{
@@ -212,8 +194,22 @@ class App extends Component {
                             fill={[]}
                             legends={[]}
                         />
+                        </Col>
+                        <Col className="filter-container">
+                            <Row>
+                                <Select className="selectContainer"
+                                    value={this.state.selectedModule}
+                                    onChange={this.handleModuleChange}
+                                    options={this.state.moduleOptions}
+                                /></Row>
+                            <Row><Select className="selectContainer"
+                                value={this.state.selectedExecutionDate}
+                                onChange={this.handleExceutionDateChange}
+                                options={this.state.executionDates}
+                            /></Row>
+                            <Row><Button className="filter-btn" color="warning" onClick={() => this.getRecords(this.state.selectedModule, this.state.selectedExecutionDate)}> Go </Button></Row>
+                        </Col>
                     </Row>
-                    <hr/>
                     <Row className="table-container">
                         <Table striped>
                             <thead>

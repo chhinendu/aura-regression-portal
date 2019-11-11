@@ -31,7 +31,7 @@ class ModalExample extends Component {
 
         return (
             <div>
-                <Button color="danger" onClick={toggle}>View</Button>
+                <Button color="primary" onClick={toggle}>View</Button>
                 <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}>{header}</ModalHeader>
                     <ModalBody>
