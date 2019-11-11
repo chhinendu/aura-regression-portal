@@ -6,7 +6,7 @@ import {ResponsivePie} from '@nivo/pie';
 import './../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import {data} from './data.js';
-import {ModalExample} from './modal'
+import ModalExample from './modal.js'
 
 
 class App extends Component {
@@ -113,7 +113,7 @@ class App extends Component {
                     <td>{testMap[row.testCaseClass].join(', ')}</td>
                     <td>Mark</td>
                     <td>Otto</td>
-                    <td><ModalExample data={row}></ModalExample></td>
+                    <td><ModalExample data={row}/></td>
                 </tr>
             );
         });
