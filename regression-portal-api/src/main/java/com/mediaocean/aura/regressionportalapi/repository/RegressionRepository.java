@@ -18,7 +18,9 @@ public interface RegressionRepository extends JpaRepository<Regression, Long> {
 
     @Query("SELECT new Regression(r.module, r.executionDate) FROM Regression r GROUP BY r.module, r.executionDate")
     List<Regression> findAllByRegressionQuery();
-    
-    @Query("SELECT  new Regression(r.locale, r.executionDate, r.executionStatus) FROM Regression r WHERE r.testCaseClass = :testClassName and r.locale = :locale and rownum <= :noOfRun GROUP BY r.locale, r.executionDate, r.executionStatus ORDER BY to_date(r.executionDate,'DD/MM/YYYY') desc;")
-    List<Regression> getLatestExecutionStatus(@Param("noOfRun") String noOfRun, @Param("testClassName") String testClassName, @Param("locale") String locale);
+
+    @Query("SELECT  new Regression(r.locale, r.executionDate, r.executionStatus) FROM Regression r WHERE r.testCaseClass = :testClassName and r.locale = :locale and rownum <= :noOfRun GROUP BY r.locale, r.executionDate, r.executionStatus ORDER BY to_date(r.executionDate,'DD/MM/YYYY') desc")
+    List<Regression> getLatestExecutionStatus(@Param("noOfRun") int noOfRun, @Param("testClassName") String testClassName, @Param("locale") String locale);
+
+    Regression getByTestCaseClassAndExecutionDateAndModule(String testCaseClass, String executionDate, String module);
 }

@@ -13,9 +13,6 @@ class RegressionPK implements Serializable {
     @Column(name = "TESTCASECLASS")
     private String testCaseClass;
 
-    @Column(name = "TESTCASEMETHOD")
-    private String testCaseMethod;
-
     @Column(name = "EXECUTIONDATE")
     private String exectutionDate;
 }
@@ -38,7 +35,7 @@ public class Regression {
     @Column(name = "TESTCASECLASS", insertable = false, updatable = false)
     private String testCaseClass;
 
-    @Column(name = "TESTCASEMETHOD", insertable = false, updatable = false)
+    @Column(name = "TESTCASEMETHOD")
     private String testCaseMethod;
 
     @Column(name = "RUNNUMBER")

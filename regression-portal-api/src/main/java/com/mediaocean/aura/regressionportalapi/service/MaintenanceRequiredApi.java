@@ -1,31 +1,27 @@
 package com.mediaocean.aura.regressionportalapi.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.mediaocean.aura.regressionportalapi.entity.Regression;
 import com.mediaocean.aura.regressionportalapi.repository.RegressionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@RestController
-@RequestMapping("/is-maintenance-required")
+import java.util.List;
+
+@Service
 public class MaintenanceRequiredApi {
 
 	 @Autowired
-	    RegressionRepository regressionRepository;
-	
-	@GetMapping(value = "/")//TODO need to ask
-    public boolean get(String noOfRun, String testClassName, String continent) {
+	 RegressionRepository regressionRepository;
+
+
+	public boolean get(int noOfRun, String testClassName, String continent) {
 		List<Regression> data = regressionRepository.getLatestExecutionStatus(noOfRun, testClassName, continent);
-		int latestRunNum = Integer.parseInt(noOfRun);
-		
+		int count = 0;
 		for(Regression record: data) {
-			//record.
+			if (record.getExecutionStatus().equals("Fail"))
+				count++;
 		}
-        return true;
+		return (noOfRun == count);
         
     }
 }

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {Container, Row, Col, Table, Button, Spinner} from 'reactstrap';
+import {Button, Col, Container, Row, Spinner, Table} from 'reactstrap';
 import Select from 'react-select';
-import {ResponsiveBar} from '@nivo/bar';
+import {ResponsivePie} from '@nivo/pie';
 import './../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
+import {data} from './data.js';
 
 
 class App extends Component {
@@ -80,15 +81,27 @@ class App extends Component {
             });
     }
 
+    getChartData(filterData) {
+        const defaultData = _.cloneDeep(data);
+
+        _.forEach(filterData, (value, key) => {
+            const selectedValue = defaultData.find((data) => data.id === value.locale);
+            if (selectedValue) {
+                selectedValue.value++;
+            }
+        });
+        return defaultData;
+    }
+
     render() {
         let count = 0;
+        let groupedRecords = _.groupBy(this.state.tableData, 'testCaseClass');
         let records = this.state.tableData.map(function (row) {
             count += 1;
             return (
                 <tr>
                     <th scope="row">{count}</th>
                     <td>{row.testCaseClass}</td>
-                    <td>{row.testCaseMethod}</td>
                     <td>{row.continent}</td>
                     <td>Mark</td>
                     <td>Otto</td>
@@ -96,6 +109,7 @@ class App extends Component {
                 </tr>
             );
         });
+        let data = this.getChartData(this.state.tableData);
         return (
             <div>
                 <header className="app-header">
@@ -117,13 +131,87 @@ class App extends Component {
                         <Col><Button color="warning" onClick={() => this.getRecords(this.state.selectedModule, this.state.selectedExecutionDate)}>Filter</Button></Col>
                     </Row>
                     <hr/>
+                    <Row style={{height: 400}}>
+                        <ResponsivePie
+                            data={data}
+                            margin={{
+                                "top": 40,
+                                "right": 80,
+                                "bottom": 80,
+                                "left": 80
+                            }}
+                            innerRadius={0.5}
+                            padAngle={0.7}
+                            cornerRadius={3}
+                            colors="nivo"
+                            colorBy={data => data.color}
+                            borderWidth={1}
+                            borderColor="inherit:darker(0.2)"
+                            radialLabel={data => `${data.label} failures`}
+                            radialLabelsSkipAngle={10}
+                            radialLabelsTextXOffset={6}
+                            radialLabelsTextColor="#333333"
+                            radialLabelsLinkOffset={0}
+                            radialLabelsLinkDiagonalLength={16}
+                            radialLabelsLinkHorizontalLength={24}
+                            radialLabelsLinkStrokeWidth={1}
+                            radialLabelsLinkColor="inherit"
+                            sliceLabel={data => data.value}
+                            slicesLabelsSkipAngle={10}
+                            slicesLabelsTextColor="#333333"
+                            animate={true}
+                            motionStiffness={90}
+                            motionDamping={15}
+                            theme={{
+                                "tooltip": {
+                                    "container": {
+                                        "fontSize": "13px"
+                                    }
+                                },
+                                "labels": {
+                                    "textColor": "#555"
+                                }
+                            }}
+                            defs={[
+                                {
+                                    "id": "dots",
+                                    "type": "patternDots",
+                                    "background": "inherit",
+                                    "color": "rgba(255, 255, 255, 0.3)",
+                                    "size": 4,
+                                    "padding": 1,
+                                    "stagger": true
+                                },
+                                {
+                                    "id": "lines",
+                                    "type": "patternLines",
+                                    "background": "inherit",
+                                    "color": "rgba(255, 255, 255, 0.3)",
+                                    "rotation": -45,
+                                    "lineWidth": 6,
+                                    "spacing": 10
+                                },
+                                {
+                                    "id": "squares",
+                                    "type": "patternSquares",
+                                    "background": "inherit",
+                                    "color": "rgba(255, 255, 255, 0.3)",
+                                    "rotation": -45,
+                                    "lineWidth": 6,
+                                    "spacing": 10
+                                }
+                            ]}
+                            fill={[]}
+                            legends={[]}
+                        />
+                    </Row>
+                    <hr/>
                     <Row className="table-container">
                         <Table striped>
                             <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Test Case Name</th>
-                                <th>Method Name</th>
                                 <th>Continent</th>
                                 <th>Execution Status</th>
                                 <th>Assigned to</th>

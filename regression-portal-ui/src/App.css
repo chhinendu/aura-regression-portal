@@ -26,3 +26,288 @@
     left: 50%;
     top: 50%;
 }
+
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-header {
+    background-color: #00a4f0;
+    height: 80px;
+    padding: 20px;
+    color: white;
+}
+
+.App-title {
+    font-size: 1.5em;
+}
+
+.App-intro {
+    font-size: large;
+}
+
+.content {
+    margin-left: 0;
+}
+
+.client-options {
+    width: 200px;
+    text-align: left;
+}
+
+.card__header {
+    height: 70px;
+    background-color: #00a4f0;
+}
+
+.card__header p {
+    margin: 0;
+}
+
+.chart-page_main {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table-container {
+    padding: 20px;
+    overflow: visible;
+}
+
+.header-detail {
+    min-width: 250px;
+}
+
+.header-detail span {
+    font-size: 11px;
+}
+
+.company-count {
+    float: left;
+}
+
+.due-total-title {
+    float: right;
+    color: var(--chart-meta-color);
+}
+
+h2 {
+    color: var(--main-text-color);
+}
+
+.card_body {
+    display: flex;
+    align-items: center;
+}
+
+.card_body .column {
+    opacity: 0.8;
+
+}
+
+.card_body.pie .column {
+    float: left;
+    padding-left: 20px;
+}
+
+.card_body.line .column {
+    float: right;
+    padding-right: 20px;
+}
+
+.card_body.inactive {
+    display: none;
+}
+
+.card_body.pie.active {
+    display: flex;
+
+    -webkit-animation: slide-right .3s ease-out;
+    -moz-animation: slide-right .3s ease-out;
+}
+
+.card_body.line.active {
+    display: flex;
+
+    -webkit-animation: slide-left .3s ease-out;
+    -moz-animation: slide-left .3s ease-out;
+}
+
+.chart-tabs__content {
+    top: 280px;
+}
+
+@-webkit-keyframes slide-right {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@-moz-keyframes slide-right {
+    0% {
+        opacity: 0;
+        -moz-transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        -moz-transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes slide-left {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@-moz-keyframes slide-left {
+    0% {
+        opacity: 0;
+        -moz-transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        -moz-transform: translateX(0);
+    }
+}
+
+.card_body .column:hover {
+    opacity: 1;
+    color: #444444;
+}
+
+.card_body .column:hover .icon {
+    color: #000000;
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+}
+
+.column .icon {
+    opacity: 1;
+    height: 1em;
+    color: #333333;
+    display: block;
+    margin: 0em auto 0.25em;
+    font-size: 2em;
+
+    -webkit-transition: color 0.6s ease,
+    transform 0.2s ease;
+    -moz-transition: color 0.6s ease,
+    transform 0.2s ease;
+    -o-transition: color 0.6s ease,
+    transform 0.2s ease;
+    -ms-transition: color 0.6s ease,
+    transform 0.2s ease;
+    transition: color 0.6s ease,
+    transform 0.2s ease;
+}
+
+.light-column {
+    font-size: 12px;
+    color: var(--chart-meta-color);
+}
+
+.hide-column {
+    display: none;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #0C9;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.float-setting {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 110px;
+    right: 40px;
+    background-color: #bcbdbd;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.my-float {
+    margin: 18px 0 !important;
+}
+
+.ui.table td.hi-warning, .ui.table tr.hi-warning {
+    background-color: rgba(242, 113, 28, 0.1);
+    color: rgba(242, 113, 28, 0.6);
+}
+
+.ui.selectable.table tr.hi-warning:hover, .ui.selectable.table tr:hover td.hi-warning, .ui.table tr td.selectable.hi-warning:hover {
+    background-color: rgba(242, 113, 28, 0.2) !important;
+    color: rgba(242, 113, 28, 0.6) !important;
+
+}
+
+input[name="datesRange"] {
+    width: 250px;
+}
+
+.ui.menu {
+    border-width: 0;
+    width: 0;
+}
+
+.ui.vertical.menu {
+    width: 0;
+}
+
+.ui.menu .dropdown.item:hover, .ui.vertical.menu .active.item,
+.ui.menu .active.item:hover, .ui.vertical.menu .active.item:hover {
+    background: none;
+}
+
+.ui.message.retrain {
+    position: absolute;
+    margin-right: 20px;
+    margin-top: 10px;
+    right: 0;
+    z-index: 1001;
+    top: 0;
+}
+
+.labels {
+    font-weight: bold;
+    text-align: left;
+    margin: 10px 0 10px 10px;
+}
