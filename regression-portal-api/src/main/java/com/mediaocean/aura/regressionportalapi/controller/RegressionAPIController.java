@@ -18,6 +18,6 @@ public class RegressionAPIController {
 
     @GetMapping(value = "/")
     public List<Regression> get() {
-        return regressionRepository.findAllByExectutionDateAndModule("19/09/2019", "TIME");
+        return regressionRepository.findAllByExectutionDateAndModuleAndExecutionStatusQuery("19/09/2019", "TIME");
     }
 }

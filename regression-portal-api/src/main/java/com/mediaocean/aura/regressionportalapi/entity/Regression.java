@@ -43,7 +43,7 @@ public class Regression {
     private int runNumber;
 
     @Column(name = "EXECUTIONDATE", insertable = false, updatable = false)
-    private String exectutionDate;
+    private String executionDate;
 
     @Column(name = "EXECUTIONSTATUS")
     private String executionStatus;
