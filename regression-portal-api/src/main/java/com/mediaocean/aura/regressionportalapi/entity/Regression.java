@@ -1,6 +1,7 @@
 package com.mediaocean.aura.regressionportalapi.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ class RegressionPK implements Serializable {
 @Entity
 @Data
 @Table(name = "AURA_TESTCASE_EXECUTION_STATUS")
+@NoArgsConstructor
 public class Regression {
 
     @EmbeddedId
@@ -48,15 +50,11 @@ public class Regression {
     @Column(name = "EXECUTIONSTATUS")
     private String executionStatus;
 
-    @Column(name = "FAILUREREASON")
-    private String failureReason;
-
-    @Column(name = "TESTRUNSTATUS")
-    private String testRunStatus;
-
-    @Column(name = "NODEASSIGNED")
-    private String nodeAssigned;
-
     @Column(name = "LOCALE")
     private String locale;
+
+    public Regression(String module, String executionDate) {
+        this.module = module;
+        this.executionDate = executionDate;
+    }
 }

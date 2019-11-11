@@ -12,4 +12,10 @@ import java.util.List;
 public interface RegressionRepository extends JpaRepository<Regression, Long> {
     @Query("SELECT r FROM Regression r WHERE r.executionDate = :executionDate AND r.module = :module AND r.executionStatus <> 'Pass'")
     List<Regression> findAllByExectutionDateAndModuleAndExecutionStatusQuery(@Param("executionDate") String executionDate, @Param("module") String module);
+
+    @Query("SELECT r FROM Regression r WHERE r.executionDate = :executionDate AND r.executionStatus <> 'Pass'")
+    List<Regression> findAllByExectutionDateAndExecutionStatusQuery(@Param("executionDate") String executionDate);
+
+    @Query("SELECT new Regression(r.module, r.executionDate) FROM Regression r GROUP BY r.module, r.executionDate")
+    List<Regression> findAllByRegressionQuery();
 }
