@@ -57,4 +57,10 @@ public class Regression {
         this.module = module;
         this.executionDate = executionDate;
     }
+    
+    public Regression(String locale, String executionDate, String executionStatus) {
+    	this.locale = locale;
+        this.executionDate = executionDate;
+        this.executionStatus = executionStatus;
+    }
 }
