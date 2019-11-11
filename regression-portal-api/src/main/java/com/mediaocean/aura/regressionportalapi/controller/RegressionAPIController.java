@@ -41,6 +41,6 @@ public class RegressionAPIController {
 
     @GetMapping(value = "/detail")
     public RegressionDetail getDetails(@RequestParam String module, @RequestParam String date, @RequestParam String testCase) {
-        return regressionDetailRepository.getByTestCaseClassAndExecutionDateAndModule(testCase, date, date);
+        return regressionDetailRepository.getByTestCaseClassAndExecutionDateAndModule(testCase, date, module);
     }
 }

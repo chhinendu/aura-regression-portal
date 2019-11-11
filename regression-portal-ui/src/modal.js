@@ -3,24 +3,27 @@ import {Button, Modal, ModalBody, ModalHeader} from 'reactstrap';
 
 class ModalExample extends Component {
 
+    state = {
+        modal: false,
+        body: ''
+    }
 
     render() {
-        const modal = false, setModal = false;
         let data = this.props.data;
         let header = data.testCaseClass;
         let body = '';
 
         const toggle = () => {
-            if (!modal) {
+            if (!this.state.modal) {
                 fetch(`http://pu-nb-cpaul.na.rtdom.net:8080/regression-api/detail?module=${data.module}&date=${data.executionDate}&testCase=${data.testCaseClass}`)
                     .then(res => res.json())
                     .then(response => {
-                        body = response.failureReason;
-                        setModal(!modal);
+                        this.setState({body: response.failureReason})
+                        this.setState({modal: !this.state.modal})
                     })
             }
             else {
-                setModal(!modal);
+                this.setState({modal: !this.state.modal})
             }
 
         };
@@ -29,10 +32,10 @@ class ModalExample extends Component {
         return (
             <div>
                 <Button color="danger" onClick={toggle}>View</Button>
-                <Modal isOpen={modal} toggle={toggle}>
+                <Modal isOpen={this.state.modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}>{header}</ModalHeader>
                     <ModalBody>
-                        {body}
+                        {this.state.body}
                     </ModalBody>
                 </Modal>
             </div>
