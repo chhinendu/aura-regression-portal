@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Button, Modal, ModalBody, ModalHeader} from 'reactstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import Select from "react-select";
 
 class ModalExample extends Component {
 
@@ -37,6 +38,12 @@ class ModalExample extends Component {
                     <ModalBody>
                         {this.state.body}
                     </ModalBody>
+                    <ModalFooter>
+                        <Select className="selectContainerModal"
+                                options={[{value: 'Pass', label: 'Pass'}, {value: 'Fail', label: 'Fail'}]}
+                        />
+                        <Button color="success">Save</Button>
+                    </ModalFooter>
                 </Modal>
             </div>
         )

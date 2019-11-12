@@ -107,8 +107,8 @@ class App extends Component {
                     <th scope="row">{count}</th>
                     <td>{row.testCaseClass}</td>
                     <td>{testMap[row.testCaseClass].join(', ')}</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
+                    <td>Fail</td>
+                    <td>DSRD-21245</td>
                     <td><ModalExample data={row}/></td>
                 </tr>
             );
@@ -218,7 +218,7 @@ class App extends Component {
                                 <th>Test Case Name</th>
                                 <th>Continent</th>
                                 <th>Execution Status</th>
-                                <th>Assigned to</th>
+                                <th>Comments</th>
                                 <th>View</th>
                             </tr>
                             </thead>
