@@ -6,7 +6,7 @@
     "@nivo/bar": "^0.59.2",
     "@nivo/pie": "^0.42.1",
     "bootstrap": "^4.3.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
